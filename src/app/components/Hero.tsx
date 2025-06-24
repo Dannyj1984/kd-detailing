@@ -16,7 +16,7 @@ export default function Hero() {
         >
           <div className="relative w-full aspect-[7/4]">
             <Image 
-              src="/logo-tsp.png" 
+              src="/logo-wide.jpeg" 
               alt="KD Detailing" 
               fill
               className="object-contain rounded-lg" 

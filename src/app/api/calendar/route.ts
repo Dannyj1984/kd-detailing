@@ -27,11 +27,11 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, service, notes, startTime, endTime } = body;
+    const { name, email, phone, service, payment, notes, startTime, endTime } = body;
 
     const event = {
       summary: `Car Detailing Appointment - ${service}`,
-      description: `Client: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nNotes: ${notes}`,
+      description: `Client: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nPayment: ${payment}\nNotes: ${notes}`,
       start: {
         dateTime: startTime,
         timeZone: 'Europe/London',

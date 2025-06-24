@@ -19,7 +19,13 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/">
-            <span>KD</span>
+            <Image 
+              src="/logo.jpeg" 
+              alt="KD Detailing" 
+              width={50} 
+              height={50}
+              className="object-contain rounded-lg" 
+            />
           </Link>
           
           {/* Desktop Menu */}

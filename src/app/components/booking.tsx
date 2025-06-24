@@ -21,6 +21,7 @@ export default function Booking() {
     email: '',
     phone: '',
     service: '',
+    payment: '',
     notes: ''
   });
 
@@ -138,6 +139,7 @@ export default function Booking() {
         email: '',
         phone: '',
         service: '',
+        payment: '',
         notes: ''
       });
       setSelectedDate(null);
@@ -242,6 +244,20 @@ export default function Booking() {
                     <option value="interior">Interior Detailing</option>
                     <option value="paint">Paint Correction</option>
                     <option value="ceramic">Ceramic Coating</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">Preferred Payment method</label>
+                  <select
+                    required
+                    className="w-full p-2 border rounded"
+                    value={bookingForm.payment}
+                    onChange={(e) => setBookingForm({...bookingForm, payment: e.target.value})}
+                  >
+                    <option value="">Select a payment method</option>
+                    <option value="card">Card</option>
+                    <option value="cash">Cash</option>
                   </select>
                 </div>
 
