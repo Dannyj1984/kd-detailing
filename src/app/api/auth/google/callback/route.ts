@@ -1,6 +1,5 @@
 import { google } from 'googleapis';
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
@@ -18,23 +17,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    console.log('🔄 AUTH CALLBACK STARTED - Getting tokens with code:', code);
     const { tokens } = await oauth2Client.getToken(code);
-    
-    // Log tokens in a clear format for copying to .env.local
-    console.log('\n🎯🎯🎯 GOOGLE CALENDAR TOKENS 🎯🎯🎯');
-    console.log('----------------------------------------');
-    console.log('❗ ADD THESE TO YOUR .env.local FILE ❗\n');
-    console.log(`GOOGLE_ACCESS_TOKEN=${tokens.access_token}`);
-    if (tokens.refresh_token) {
-      console.log(`\nGOOGLE_REFRESH_TOKEN=${tokens.refresh_token}`);
-    } else {
-      console.log('\n⚠️ WARNING: No refresh token received!');
-      console.log('You need to revoke access at https://myaccount.google.com/permissions and try again.');
-    }
-    console.log('\n----------------------------------------');
-    console.log('🎯🎯🎯 END OF TOKENS 🎯🎯🎯\n');
-    
     oauth2Client.setCredentials(tokens);
 
     // Create response with cookies

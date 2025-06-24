@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -32,10 +32,8 @@ export default function Booking() {
     endTime: '17:00'
   };
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  const handleDateClick = async (arg: any) => {
-    console.log('📅 Date clicked:', arg.date);
+  const handleDateClick = async (arg: { date: Date}) => {
     setSelectedDate(arg.date);
     try {
       const response = await fetch(`/api/calendar?date=${arg.date.toISOString()}`);
@@ -43,18 +41,15 @@ export default function Booking() {
       
       if (!response.ok) {
         if (data.error === 'Not authenticated') {
-          setIsAuthenticated(false);
           window.location.href = '/api/auth/google';
           return;
         }
         throw new Error(data.error);
       }
       
-      console.log('Calendar API Response:', data);
-      
       if (data.slots) {
         // API returned available slots directly
-        const slots = data.slots.map((slot: any) => ({
+        const slots = data.slots.map((slot: { start: string; end: string }) => ({
           start: new Date(slot.start),
           end: new Date(slot.end),
           title: 'Available'
@@ -126,7 +121,6 @@ export default function Booking() {
       
       if (!response.ok) {
         if (data.error === 'Not authenticated') {
-          setIsAuthenticated(false);
           window.location.href = '/api/auth/google';
           return;
         }
