@@ -36,7 +36,7 @@ export default function Navigation() {
             <Link href="/work" className={`text-gray-600 hover:text-red-500 ${route === '/work' ? 'text-red-600 scale-130 font-caveat italic' : ''}`}>Work</Link>
             <Link href="/contact" className={`text-gray-600 hover:text-red-500 ${route === '/contact' ? 'text-red-600 scale-130 font-caveat italic' : ''}`}>Contact</Link>
             <Link 
-              href="tel:+7597040947" 
+              href="tel:+7301573321" 
               className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
             >
               Call Us
@@ -47,10 +47,13 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <div className="flex items-center space-x-4 md:hidden">
             <Link 
-              href="tel:+7597040947" 
+              href="tel:+7301573321" 
               className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors text-sm"
             >
               Call
+            </Link>
+            <Link 
+              href="/book" className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Book Now
             </Link>
             <button 
               className="p-2"
