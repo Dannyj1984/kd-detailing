@@ -2,8 +2,9 @@ import { projects } from '@/app/data/projects';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-export default function WorkDetail({ params }: { params: { id: string } }) {
-  const project = projects.find(p => p.id === parseInt(params.id));
+export default async function WorkDetail({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  const project = projects.find(p => p.id === parseInt(resolvedParams.id));
 
   if (!project) {
     notFound();
