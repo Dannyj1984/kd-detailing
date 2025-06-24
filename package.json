@@ -15,7 +15,9 @@
     "@fullcalendar/timegrid": "^6.1.17",
     "@googleapis/calendar": "^10.0.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.3.1",
     "framer-motion": "^12.6.2",
+    "googleapis": "^120.0.0",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -28,7 +30,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "open": "^9.1.0",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
