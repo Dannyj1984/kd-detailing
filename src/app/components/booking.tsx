@@ -19,6 +19,7 @@ export default function Booking() {
   const [bookingForm, setBookingForm] = useState({
     name: '',
     email: '',
+    vehicle: '',
     phone: '',
     service: '',
     payment: '',
@@ -27,7 +28,7 @@ export default function Booking() {
 
   // Business hours
   const businessHours = {
-    daysOfWeek: [1,3,5], // 0 = Sunday, 1 = Monday, etc.
+    daysOfWeek: [3,4,5],
     startTime: '09:00',
     endTime: '17:00'
   };
@@ -55,6 +56,7 @@ export default function Booking() {
           title: 'Available'
         }));
         setAvailableSlots(slots);
+        setSelectedDate(slots[0].start);
       } else {
         // Fallback to generating slots
         const slots = generateAvailableSlots(arg.date, []);
@@ -99,10 +101,51 @@ export default function Booking() {
     return slots;
   };
 
+  const calculatePrice = (service: string) => {
+    switch (service) {
+      case 'exterior':
+        switch (bookingForm.vehicle) {
+          case 'car':
+            return 30;
+          case 'suv':
+            return 35;
+          case 'van':
+            return 40;
+          case 'lwb-van':
+            return 45;
+        }
+      case 'mini':
+        switch (bookingForm.vehicle) {
+          case 'car':
+            return 55;
+          case 'suv':
+            return 60;
+          case 'van':
+            return 65;
+          case 'lwb-van':
+            return 70;
+        }
+      case 'prestige':
+        switch (bookingForm.vehicle) {
+          case 'car':
+            return 75;
+          case 'suv':
+            return 80;
+          case 'van':
+            return 85;
+          case 'lwb-van':
+            return 90;
+        }
+      default:
+        return 30;
+    }
+  }
+
   const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!selectedDate) return;
+    if (!bookingForm.email || !bookingForm.phone || !bookingForm.vehicle || !bookingForm.service) return;
     
     try {
       const response = await fetch('/api/calendar', {
@@ -131,6 +174,7 @@ export default function Booking() {
       setBookingForm({
         name: '',
         email: '',
+        vehicle: '',
         phone: '',
         service: '',
         payment: '',
@@ -160,6 +204,15 @@ export default function Booking() {
               selectable={true}
               selectConstraint="businessHours"
               height="auto"
+              validRange={{
+                start: new Date().toISOString().split('T')[0] 
+              }}
+              hiddenDays={businessHours.daysOfWeek}
+              selectAllow={(selectInfo) => {
+                const day = selectInfo.start.getDay();
+                return businessHours.daysOfWeek.includes(day);
+              }}
+              selectMirror={true}
             />
           </div>
 
@@ -176,7 +229,7 @@ export default function Booking() {
                   {availableSlots.map((slot, index) => (
                     <span
                       key={index}
-                      className="p-2 text-sm bg-white border cursor-pointer rounded !hover:bg-gray-50"
+                      className={`p-2 text-sm border cursor-pointer rounded hover:bg-gray-50 ${selectedDate.getTime() === slot.start.getTime() ? 'bg-gray-100' : 'bg-white'}`}
                       onClick={() => setSelectedDate(slot.start)}
                     >
                       {format(slot.start, 'h:mm a')} - {format(slot.end, 'h:mm a')}
@@ -226,25 +279,42 @@ export default function Booking() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Service</label>
+                  <label className="block text-sm font-medium mb-1">Vehicle</label>
+                  <select
+                    required
+                    className="w-full p-2 border rounded"
+                    value={bookingForm.vehicle}
+                    onChange={(e) => setBookingForm({...bookingForm, vehicle: e.target.value})}
+                  >
+                    <option value="">Select a vehicle</option>
+                    <option value="car">Car</option>
+                    <option value="suv">SUV</option>
+                    <option value="vans">Vans</option>
+                    <option value="lwb-vans">LWB Vans</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className={`block text-sm font-medium mb-1 ${bookingForm.vehicle === '' && 'text-red-600'}`}>Service - {bookingForm.vehicle === '' && 'Please select a vehicle first'}</label>
                   <select
                     required
                     className="w-full p-2 border rounded"
                     value={bookingForm.service}
                     onChange={(e) => setBookingForm({...bookingForm, service: e.target.value})}
+                    disabled={!bookingForm.vehicle || bookingForm.vehicle === ''}
                   >
                     <option value="">Select a service</option>
-                    <option value="exterior">Exterior Detailing</option>
-                    <option value="interior">Interior Detailing</option>
-                    <option value="paint">Paint Correction</option>
-                    <option value="ceramic">Ceramic Coating</option>
+                    <option value="exterior-valet">Exterior Valet £{calculatePrice('exterior')}</option>
+                    <option value="mini-valet">Mini Valet £{calculatePrice('mini')}</option>
+                    <option value="prestige-valet">Prestige Valet £{calculatePrice('prestige')}</option>
                   </select>
                 </div>
+
+                
 
                 <div>
                   <label className="block text-sm font-medium mb-1">Preferred Payment method</label>
                   <select
-                    required
                     className="w-full p-2 border rounded"
                     value={bookingForm.payment}
                     onChange={(e) => setBookingForm({...bookingForm, payment: e.target.value})}
