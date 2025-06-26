@@ -30,7 +30,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          We don&apos;t just clean, we rejuvenate - our valeting services bring your car "back to life"
+          We don&apos;t just clean, we rejuvenate - our valeting services bring your car &quot;back to life&quot;
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
