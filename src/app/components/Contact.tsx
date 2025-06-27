@@ -26,7 +26,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gray-50">
+    <section id="contact" className="py-10 bg-gray-50">
+      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto"></div>
       <div className="max-w-4xl mx-auto px-4">
         <h2 className="text-3xl font-bold mb-12 text-center">Get in Touch</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -79,6 +82,25 @@ export default function Contact() {
             Send Message
           </button>
         </form>
+      </div>
+      {/* Map Section */}
+      <div className="mt-12">
+        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
+          <h2 className="text-xl font-semibold mb-4 text-center">Find Us</h2>
+          <div className="aspect-w-16 aspect-h-9 flex justify-center">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9495.185809563269!2d-2.0412342243414363!3d53.489966640360564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2suk!4v1751057240580!5m2!1sen!2suk" 
+              width="900" 
+              height="450" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </div>
+      </div>
+      </div>
       </div>
     </section>
   );

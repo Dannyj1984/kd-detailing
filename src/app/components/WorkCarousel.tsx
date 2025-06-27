@@ -29,7 +29,7 @@ export default function WorkCarousel() {
               <Link href={`/work/${project.id}`}>
                 <div className="relative h-64 w-full cursor-pointer">
                   <Image
-                    src={project.image}
+                    src={project.image.url}
                     alt={project.title}
                     fill
                     style={{ objectFit: 'cover' }}

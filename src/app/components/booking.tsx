@@ -335,6 +335,13 @@ export default function Booking() {
                   />
                 </div>
 
+                <div>
+                  <span className="text-xs text-gray-600">After submitting your booking. We will send a confirmation email with your appointment details including the location.</span>
+                  <br />
+                  <span className="text-xs text-gray-600">Payment can be made by cash or card on completion of your service</span>
+                </div>
+
+
                 <button
                   type="submit"
                   className="w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition-colors"

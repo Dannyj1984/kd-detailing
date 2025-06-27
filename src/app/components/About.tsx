@@ -11,7 +11,13 @@ export default function About() {
           We specialise in comprehensive detailing services, from thorough exterior polishing and paint correction to meticulous interior cleaning and protection. Our professional team uses only premium products and advanced techniques to restore and maintain your vehicle&apos;s pristine condition.
           </p>
           <p className="text-gray-600 leading-relaxed mt-4">
-          Whether you drive a luxury vehicle, a family car, or a cherished classic, we treat every automobile with the same level of care and dedication. Your satisfaction and your vehicle&apos;s transformation are our top priorities.
+          Whether you drive a luxury vehicle, a family car, or a cherished classic, we treat every vehicle with the same level of care and dedication. Your satisfaction and your vehicle&apos;s transformation are our top priorities.
+          </p>
+          <p className="text-gray-600 leading-relaxed mt-4">
+            We are based in Stalybridge, Manchester and serve the surrounding areas. You are welcome to drop your car with us and return later in the day, or wait on site whilst we work on your vehicle.
+          </p>
+          <p className="text-gray-600 leading-relaxed mt-4">
+            We offer a 15% off for first time customers and offer a satisfaction guarantee. 
           </p>
         </div>
       </div>
